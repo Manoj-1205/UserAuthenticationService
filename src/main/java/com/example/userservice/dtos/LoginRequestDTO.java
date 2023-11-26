@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 @Setter
 @AllArgsConstructor
 @Builder
-public class UserDetailsDTO {
-    private String fullName;
+public class LoginRequestDTO {
     private String email;
     private String password;
 }

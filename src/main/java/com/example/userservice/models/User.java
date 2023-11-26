@@ -1,5 +1,6 @@
 package com.example.userservice.models;
 
+import com.example.userservice.dtos.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,4 +19,11 @@ public class User extends BaseModel {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles=new ArrayList<>();
+
+    public UserDTO toUserDTO(){
+        return UserDTO.builder()
+                .email(email)
+                .roles(roles)
+                .build();
+    }
 }
