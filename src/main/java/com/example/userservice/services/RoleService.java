@@ -1,5 +1,6 @@
 package com.example.userservice.services;
 
+import com.example.userservice.exceptions.RoleAlreadyExistException;
 import com.example.userservice.models.Role;
 import com.example.userservice.repositories.RoleRepository;
 import lombok.AllArgsConstructor;
@@ -14,8 +15,12 @@ import org.springframework.stereotype.Service;
 public class RoleService {
     private RoleRepository roleRepository;
     public ResponseEntity<Role> createRole(Role role){
+        boolean checkRoleIsPresent = roleRepository.existsByRoleName(role.getRoleName());
+        if(checkRoleIsPresent)
+            throw new RoleAlreadyExistException("Role already exists.");
+        Role savedRole = roleRepository.save(role);
         return new ResponseEntity<>(
-                roleRepository.save(role),
+                savedRole,
                 HttpStatus.OK
         );
     }

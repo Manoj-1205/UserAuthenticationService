@@ -25,6 +25,6 @@ public class UserController {
     @PostMapping("/{id}/roles")
     public ResponseEntity<UserDTO> assignRolesToUser(@PathVariable Long id, @RequestBody AssignRoleDTO assignRoleDTO){
         //Add functionality like roles for admin need to be added only if it exists in DB
-        return userService.assignRolesToUser(id, assignRoleDTO);
+        return userService.assignRolesToUser(id, assignRoleDTO.getRoleNames());
     }
 }

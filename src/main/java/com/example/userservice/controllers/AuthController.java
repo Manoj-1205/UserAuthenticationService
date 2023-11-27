@@ -5,8 +5,11 @@ import com.example.userservice.dtos.*;
 import com.example.userservice.models.SessionStatus;
 import com.example.userservice.services.AuthService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -26,9 +29,20 @@ public class AuthController {
     }
 
 
-    @GetMapping("/validate")
-    public SessionStatus validate(@RequestBody ValidateTokenRequestDTO validateTokenRequestDTO){
-        return authService.validateToken(validateTokenRequestDTO.getUserId(), validateTokenRequestDTO.getToken());
+    @PostMapping("/validate")
+    public ResponseEntity<ValidateTokenResponseDTO> validate(@RequestBody ValidateTokenRequestDTO validateTokenRequestDTO){
+        Optional<UserDTO> optionalUserDTO = authService.validateToken(validateTokenRequestDTO.getUserId(), validateTokenRequestDTO.getToken());
+
+        if(optionalUserDTO.isEmpty()){
+            ValidateTokenResponseDTO validateTokenResponseDTO=new ValidateTokenResponseDTO();
+            validateTokenResponseDTO.setSessionStatus(SessionStatus.INVALID);
+            return new ResponseEntity<>(validateTokenResponseDTO, HttpStatus.OK);
+        }
+        ValidateTokenResponseDTO validateTokenResponseDTO=new ValidateTokenResponseDTO();
+        validateTokenResponseDTO.setSessionStatus(SessionStatus.ACTIVE);
+        validateTokenResponseDTO.setUserDTO(optionalUserDTO.get());
+        return new ResponseEntity<>(validateTokenResponseDTO, HttpStatus.OK);
+
     }
 
 

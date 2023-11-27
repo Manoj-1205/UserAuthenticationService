@@ -10,5 +10,5 @@ import java.util.List;
 @Setter
 @Getter
 public class AssignRoleDTO {
-    private List<Role> roles;
+    private List<String> roleNames;
 }

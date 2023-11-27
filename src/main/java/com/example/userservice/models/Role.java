@@ -12,4 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 public class Role extends BaseModel{
     private String roleName;
+
+    public String toString(){
+        return "Role : "+roleName;
+    }
 }

@@ -11,6 +11,10 @@ import com.example.userservice.models.SessionStatus;
 import com.example.userservice.models.User;
 import com.example.userservice.repositories.SessionRepository;
 import com.example.userservice.repositories.UserRepository;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Header;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +50,16 @@ public class AuthService {
         }
 
         String token = RandomStringUtils.randomAscii(20);
+//        Header header = Jwts.header()
+//                .add("User-type","ADMIN")
+//                .build();
+//
+//        Claims claims = (Claims) Jwts.claims();
+//        claims.put("userId",user.getEmail());
+//        String jwtToken = Jwts .builder()
+//                .claims(claims)
+//                .signWith(SignatureAlgorithm.ES256,"Secret")
+
 
         Session session=new Session();
         session.setToken(token);
@@ -88,15 +102,20 @@ public class AuthService {
 
     }
 
-    public SessionStatus validateToken(Long userId, String token) {
+    public Optional<UserDTO> validateToken(Long userId, String token) {
         Optional<Session> optionalSession = sessionRepository.findByUser_IdAndToken(userId, token);
+
         if(optionalSession.isEmpty())
-            return SessionStatus.INVALID;
+            return Optional.empty();
         Session session = optionalSession.get();
+        System.out.println("Validation : "+session.getSessionStatus());
         //Checking the token is active or not
         if(!session.getSessionStatus().equals(SessionStatus.ACTIVE))
-            return SessionStatus.EXPIRED;
-        return SessionStatus.ACTIVE;
+            return Optional.empty();
+
+        User user = userRepository.findById(userId).get();
+        UserDTO userDTO = user.toUserDTO();
+        return Optional.of(userDTO);
     }
 
     public SessionStatus logout(Long userId, String token) {
