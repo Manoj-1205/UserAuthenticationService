@@ -1,11 +1,8 @@
 package com.example.userservice.controllers;
 
-import com.example.userservice.dtos.LoginRequestDTO;
+import com.example.userservice.dtos.*;
 
-import com.example.userservice.dtos.SignUpRequestDTO;
-import com.example.userservice.dtos.UserDTO;
-import com.example.userservice.models.Session;
-import com.example.userservice.models.User;
+import com.example.userservice.models.SessionStatus;
 import com.example.userservice.services.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +27,14 @@ public class AuthController {
 
 
     @GetMapping("/validate")
-    public Boolean validate(){
-        return false;
+    public SessionStatus validate(@RequestBody ValidateTokenRequestDTO validateTokenRequestDTO){
+        return authService.validateToken(validateTokenRequestDTO.getUserId(), validateTokenRequestDTO.getToken());
+    }
+
+
+    @PostMapping("/logout")
+    public SessionStatus logout(@RequestBody LogoutRequestDTO logoutRequestDTO){
+        return authService.logout(logoutRequestDTO.getUserId(),logoutRequestDTO.getToken());
     }
 
 

@@ -11,12 +11,8 @@ import com.example.userservice.models.SessionStatus;
 import com.example.userservice.models.User;
 import com.example.userservice.repositories.SessionRepository;
 import com.example.userservice.repositories.UserRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.InvalidMediaTypeException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -90,5 +86,26 @@ public class AuthService {
                 HttpStatus.OK
         );
 
+    }
+
+    public SessionStatus validateToken(Long userId, String token) {
+        Optional<Session> optionalSession = sessionRepository.findByUser_IdAndToken(userId, token);
+        if(optionalSession.isEmpty())
+            return SessionStatus.INVALID;
+        Session session = optionalSession.get();
+        //Checking the token is active or not
+        if(!session.getSessionStatus().equals(SessionStatus.ACTIVE))
+            return SessionStatus.EXPIRED;
+        return SessionStatus.ACTIVE;
+    }
+
+    public SessionStatus logout(Long userId, String token) {
+        Optional<Session> optionalSession = sessionRepository.findByUser_IdAndToken(userId, token);
+        if(optionalSession.isEmpty())
+            return SessionStatus.INVALID;
+        Session session = optionalSession.get();
+        session.setSessionStatus(SessionStatus.LOGGED_OUT);
+        sessionRepository.save(session);
+        return SessionStatus.LOGGED_OUT;
     }
 }
