@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     public User save(User user);
-    public User findByEmail(String email);
+    public Optional<User> findByEmail(String email);
     @Query("SELECT u.roles FROM User u WHERE u.id = :id")
     List<Role> findRoleById(Long id);
 

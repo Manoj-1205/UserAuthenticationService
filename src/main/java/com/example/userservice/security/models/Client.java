@@ -18,6 +18,7 @@ public class Client {
     private Instant clientSecretExpiresAt;
     private String clientName;
     @Column(length = 1000)
+
     private String clientAuthenticationMethods;
     @Column(length = 1000)
     private String authorizationGrantTypes;

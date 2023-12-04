@@ -34,8 +34,8 @@ public class SaveRegisteredClientInDBTest {
     @Test
     public void saveRegisteredClientInDb(){
 //        RegisteredClient feClient = RegisteredClient.withId(UUID.randomUUID().toString())
-//                .clientId("postman")
-//                .clientSecret(bcryptPasswordEncoder.encode("postmanpassword"))
+//                .clientId("fe")
+//                .clientSecret(bcryptPasswordEncoder.encode("secret"))
 //                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
 //                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
 //                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
@@ -43,6 +43,8 @@ public class SaveRegisteredClientInDBTest {
 //                .postLogoutRedirectUri("http://127.0.0.1:8080/")
 //                .scope(OidcScopes.OPENID)
 //                .scope(OidcScopes.PROFILE)
+//                .scope(OidcScopes.EMAIL)
+//                .scope(OidcScopes.PHONE)
 //                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
 //                .build();
 //        jpaRegisteredClientRepository.save(feClient);

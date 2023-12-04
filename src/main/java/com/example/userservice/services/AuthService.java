@@ -40,7 +40,7 @@ public class AuthService {
         this.sessionRepository = sessionRepository;
     }
     public ResponseEntity<UserDTO> login(String email, String password){
-        Optional<User> optionalUser = Optional.ofNullable(userRepository.findByEmail(email));
+        Optional<User> optionalUser = userRepository.findByEmail(email);
         if(optionalUser.isEmpty())
             throw new UserDoesNotExistException("User doesn't exist found. Please Sign up");
         User user = optionalUser.get();
@@ -84,7 +84,7 @@ public class AuthService {
 
 
     public ResponseEntity<UserDTO> signup(SignUpRequestDTO signUpRequestDTO) {
-        Optional<User> optionalUser = Optional.ofNullable(userRepository.findByEmail(signUpRequestDTO.getEmail()));
+        Optional<User> optionalUser = userRepository.findByEmail(signUpRequestDTO.getEmail());
         if(optionalUser.isPresent())
             throw new UserAlreadyExistException("User already exists. Try log in..");
         User user=new User();
