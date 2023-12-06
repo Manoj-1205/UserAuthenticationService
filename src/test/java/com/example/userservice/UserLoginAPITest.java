@@ -16,12 +16,12 @@ public class UserLoginAPITest {
     @Test
 //    @Commit
     public void userSignupTest(){
-//        SignUpRequestDTO signUpRequestDTO = SignUpRequestDTO.builder()
-//                .email("rajesh@gmail.com")
-//                .password("password")
-//                .build();
-//
-//        authController.signup(signUpRequestDTO);
+        SignUpRequestDTO signUpRequestDTO = SignUpRequestDTO.builder()
+                .email("vijay@gmail.com")
+                .password("password")
+                .build();
+
+        authController.signup(signUpRequestDTO);
 
     }
 }
