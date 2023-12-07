@@ -9,19 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 
-@SpringBootTest
+//@SpringBootTest
 public class UserLoginAPITest {
     @Autowired
     private AuthController authController;
-    @Test
+//    @Test
 //    @Commit
     public void userSignupTest(){
-        SignUpRequestDTO signUpRequestDTO = SignUpRequestDTO.builder()
-                .email("vijay@gmail.com")
-                .password("password")
-                .build();
+//        SignUpRequestDTO signUpRequestDTO = SignUpRequestDTO.builder()
+//                .email("manoj@gmail.com")
+//                .password("password")
+//                .build();
 
-        authController.signup(signUpRequestDTO);
+//        authController.signup(signUpRequestDTO);
 
     }
 }

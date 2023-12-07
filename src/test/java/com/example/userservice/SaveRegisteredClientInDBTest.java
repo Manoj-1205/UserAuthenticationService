@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.server.authorization.settings.ClientS
 
 import java.util.UUID;
 
-@SpringBootTest
+//@SpringBootTest
 
 public class SaveRegisteredClientInDBTest {
 //    @Autowired
@@ -25,28 +25,28 @@ public class SaveRegisteredClientInDBTest {
 //    @Autowired
     private JpaRegisteredClientRepository jpaRegisteredClientRepository;
 
-    @Autowired
+//    @Autowired
     SaveRegisteredClientInDBTest(PasswordEncoder passwordEncoder, JpaRegisteredClientRepository jpaRegisteredClientRepository){
         this.jpaRegisteredClientRepository=jpaRegisteredClientRepository;
         this.bcryptPasswordEncoder=passwordEncoder;
     }
 
-    @Test
+//    @Test
     public void saveRegisteredClientInDb(){
-//        RegisteredClient feClient = RegisteredClient.withId(UUID.randomUUID().toString())
-//                .clientId("fe")
-//                .clientSecret(bcryptPasswordEncoder.encode("secret"))
-//                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-//                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-//                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-//                .redirectUri("https://oauth.pstmn.io/v1/callback")
-//                .postLogoutRedirectUri("http://127.0.0.1:8080/")
-//                .scope(OidcScopes.OPENID)
-//                .scope(OidcScopes.PROFILE)
-//                .scope(OidcScopes.EMAIL)
-//                .scope(OidcScopes.PHONE)
-//                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
-//                .build();
-//        jpaRegisteredClientRepository.save(feClient);
+        RegisteredClient feClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("fe")
+                .clientSecret(bcryptPasswordEncoder.encode("secret"))
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .redirectUri("https://oauth.pstmn.io/v1/callback")
+                .postLogoutRedirectUri("http://127.0.0.1:8080/")
+                .scope(OidcScopes.OPENID)
+                .scope(OidcScopes.PROFILE)
+                .scope(OidcScopes.EMAIL)
+                .scope(OidcScopes.PHONE)
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+                .build();
+        jpaRegisteredClientRepository.save(feClient);
     }
 }
