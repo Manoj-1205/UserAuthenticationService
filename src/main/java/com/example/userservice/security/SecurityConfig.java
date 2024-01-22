@@ -54,7 +54,7 @@ import java.util.stream.Collectors;
 public class SecurityConfig {
 
     @Bean
-        @Order(1)
+    @Order(1)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
             throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
@@ -83,8 +83,9 @@ public class SecurityConfig {
             throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-//                        .requestMatchers("/auth/signup").permitAll()
-                        .anyRequest().authenticated()
+
+                        .requestMatchers("/auth/signup").permitAll()
+                        .anyRequest().permitAll()   
                 )
                 // Form login handles the redirect to the login page from the
                 // authorization server filter chain

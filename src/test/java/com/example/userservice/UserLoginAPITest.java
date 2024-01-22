@@ -11,7 +11,7 @@ import org.springframework.test.annotation.Commit;
 
 //@SpringBootTest
 public class UserLoginAPITest {
-    @Autowired
+//    @Autowired
     private AuthController authController;
 //    @Test
 //    @Commit

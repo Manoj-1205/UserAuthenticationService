@@ -7,6 +7,7 @@ import com.example.userservice.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,10 @@ public class UserController {
     private UserService userService;
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserDetails(@PathVariable Long id){
-        return userService.getUserDetails(id);
+        System.out.println("I got the request");
+            UserDTO userDTO=new UserDTO();
+            return new ResponseEntity<>(userDTO,HttpStatus.OK);
+//        return userService.getUserDetails(id);
     }
 
 
