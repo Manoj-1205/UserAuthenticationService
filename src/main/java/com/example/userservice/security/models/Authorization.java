@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "`authorization`")
-public class Authorization {
+public class    Authorization {
     @Id
     @Column
     private String id;
