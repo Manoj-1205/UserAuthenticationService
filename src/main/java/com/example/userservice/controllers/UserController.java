@@ -20,9 +20,8 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserDetails(@PathVariable Long id){
         System.out.println("I got the request");
-            UserDTO userDTO=new UserDTO();
-            return new ResponseEntity<>(userDTO,HttpStatus.OK);
-//        return userService.getUserDetails(id);
+
+        return userService.getUserDetails(id);
     }
 
 
