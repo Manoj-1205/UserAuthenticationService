@@ -12,16 +12,16 @@ import org.springframework.test.annotation.Commit;
 //@SpringBootTest
 public class UserLoginAPITest {
 //    @Autowired
-    private AuthController authController;
+//    private AuthController authController;
 //    @Test
-//    @Commit
-    public void userSignupTest(){
+////    @Commit
+//    public void userSignupTest(){
 //        SignUpRequestDTO signUpRequestDTO = SignUpRequestDTO.builder()
 //                .email("manoj@gmail.com")
 //                .password("password")
 //                .build();
-
+//
 //        authController.signup(signUpRequestDTO);
-
-    }
+//
+//    }
 }
